@@ -1,3 +1,4 @@
+import pymongo
 from pymongo import MongoClient
 
 # Connect to database
@@ -47,6 +48,17 @@ print('Updating Data:')
 pyDict['model'] = 'Focus'
 pyDict['year'] = 2018
 print(pyDict)
-result = collection.replace_one({'title': 'Document 1'}, pyDict, True)
-print(result.matched_count)
-print(result.modified_count)
+#result = collection.replace_one({'title': 'Document 1'}, pyDict, True)
+# print(result.matched_count)
+# print(result.modified_count)
+
+# adding another primary key
+print()
+print('Add another primary key:')
+#collection.create_index([("model", pymongo.TEXT)], unique = True)
+
+#delete
+print()
+print('Deleting Data:')
+result = collection.delete_many({'model': 'Focus'})#delete all documents with this model name
+print(result.deleted_count)
